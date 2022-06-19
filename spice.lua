@@ -39,7 +39,7 @@ _G.SWM = SWM;
 SWM.Backup = {};
 
 SWM.Clear = function()
-	if(hookEnabled and id != nil) then
+	if(hookEnabled and id ~= nil) then
 		socket:Send("c_cls()");
 	end
 end
