@@ -46,8 +46,8 @@ getgenv().SWM.Clear = function()
 	end
 end
 
-getgenv().cls = SWM.Clear();
-getgenv().clear = SWM.Clear();
+getgenv().cls = getgenv().SWM.Clear;
+getgenv().clear =getgenv().SWM.Clear;
 	
 getgenv().SWM.print = hookedPrint;
 getgenv().SWM.warn = hookedWarn;
