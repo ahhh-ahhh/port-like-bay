@@ -58,7 +58,7 @@ socket.OnMessage:Connect(function(msg)
     end)
 
     if not success then
-        print("@@sw@@ @@yellow@@: error in script, error:\n"..err);
+        warn(err);
     end
 end);
 
