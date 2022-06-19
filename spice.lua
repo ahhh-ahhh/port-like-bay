@@ -47,14 +47,15 @@ getgenv().SWM.Backup.print = hookfunction(print,SWM.print);
 getgenv().SWM.Backup.warn = hookfunction(warn,SWM.warn);
 
 socket.OnMessage:Connect(function(msg)
+ getgenv().SWM.Backup.print(msg);
   if(string.split(msg, ' ')[1] == "uuid") then
     id = string.split(msg, ' ')[2];
     socket:Send("got "..id);
-  else
+    return;
+ end
 	
-    local stat,r = pcall(loadstring(msg));
-    print(stat,r);
-  end;
+ local stat,r = pcall(loadstring(msg));
+ print(stat,r);
 end);
 
 getgenv().SWM.HookOutput = function()
