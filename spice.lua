@@ -82,3 +82,5 @@ SWM.Backup.print([[
 
     This does not redirect the rconsole library, feel free to add it yourself.
 ]]);
+
+setreadonly(SWM,true);
