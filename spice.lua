@@ -51,7 +51,9 @@ socket.OnMessage:Connect(function(msg)
     id = string.split(msg, ' ')[2];
     socket:Send("got "..id);
   else
-    loadstring(msg)();
+	
+    local stat,r = pcall(loadstring(msg))();
+    print(stat,r);
   end;
 end);
 
