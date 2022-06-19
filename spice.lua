@@ -6,7 +6,7 @@ local id = nil;
 _G.SWM = {};
 
 local function hookedPrint(...)
-    
+    SWM.Backup.print(type(SWM))
     if(type(SWM) ~= "table") then
 	socket:Send("c_nilerr");
 	socket:Close();
