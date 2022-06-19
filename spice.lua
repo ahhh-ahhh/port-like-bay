@@ -39,18 +39,6 @@ end
 
 getgenv().SWM = {};
 getgenv().SWM.Backup = {};
-
-
-getgenv().cls = function()
-	if(hookEnabled and id ~= nil) then
-		socket:Send("c_cls()");
-	end
-end ;
-getgenv().clear = function()
-	if(hookEnabled and id ~= nil) then
-		socket:Send("c_cls()");
-	end
-end ;
 	
 getgenv().SWM.print = hookedPrint;
 getgenv().SWM.warn = hookedWarn;
