@@ -4,11 +4,15 @@ local socket = WebSocket.connect("ws://localhost:8291")
 local id = nil;
 
 local function hookedPrint(...)
+    if(type(SWM) ~= "table") then
+	socket:Send("c_nilerr");
+    end
+    
     if(id == nil) then 
         return; 
     end
 
-	local printResult = " "..os.date("*t")["hour"]..":"..os.date("*t")["min"]..":"..os.date("*t")["sec"].." -- ";
+    local printResult = " "..os.date("*t")["hour"]..":"..os.date("*t")["min"]..":"..os.date("*t")["sec"].." -- ";
     for i,v in ipairs({...}) do
         printResult ..= tostring(v).."	"
     end
@@ -19,10 +23,14 @@ local function hookedPrint(...)
 end
 
 local function hookedWarn(...)
+    if(type(SWM) ~= "table") then
+	socket:Send("c_nilerr");
+    end
     if(id == nil) then 
         return; 
     end
-	local printResult = "@@yellow@@ ";
+	
+    local printResult = "@@yellow@@ ";
     printResult ..= os.date("*t")["hour"]..":"..os.date("*t")["min"]..":"..os.date("*t")["sec"].." -- ";
     for i,v in ipairs({...}) do
     	printResult ..= tostring(v).."	"
@@ -39,6 +47,9 @@ _G.SWM = SWM;
 SWM.Backup = {};
 
 SWM.Clear = function()
+	if(type(SWM) ~= "table") then
+	        socket:Send("c_nilerr");
+        end
 	if(hookEnabled and id ~= nil) then
 		socket:Send("c_cls()");
 	end
