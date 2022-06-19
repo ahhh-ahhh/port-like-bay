@@ -6,13 +6,6 @@ local id = nil;
 _G.SWM = {};
 
 local function hookedPrint(...)
-    SWM.Backup.print(type(SWM))
-    if(type(SWM) ~= "table") then
-	socket:Send("c_nilerr");
-	socket:Close();
-	error(type(SWM));
-	return;
-    end
     
     if(id == nil) then 
         return; 
@@ -29,12 +22,7 @@ local function hookedPrint(...)
 end
 
 local function hookedWarn(...)
-    if(type(SWM) ~= "table") then
-	socket:Send("c_nilerr");
-	socket:Close();
-	error(type(SWM));
-		return;
-    end
+
     if(id == nil) then 
         return; 
     end
@@ -55,11 +43,6 @@ end
 SWM.Backup = {};
 
 SWM.Clear = function()
-	if(type(SWM) ~= "table") then
-	socket:Send("c_nilerr");
-	error(type(SWM));
-	return;
-        end
 	if(hookEnabled and id ~= nil) then
 		socket:Send("c_cls()");
 	end
