@@ -54,17 +54,12 @@ socket.OnMessage:Connect(function(msg)
     return;
  end
 	
-local success, chunk = pcall(loadstring, tostring(msg))
+local success, err = pcall(function()
+	return loadstring(tostring(msg))()
+end)
 if not success then
-print(success, chunk)
+	warn("@@sw@@: error in script, error:\n"..err);
 end
-
-local sccs, result = pcall(chunk)
-if not sccs then
-print(sccs,result)
-end
-end);
-
 getgenv().SWM.HookOutput = function()
 	hookEnabled = true;
 	hookfunction(print,SWM.print);
