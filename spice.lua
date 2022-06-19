@@ -10,7 +10,7 @@ local function hookedPrint(...)
 
 	local printResult = " "..os.date("*t")["hour"]..":"..os.date("*t")["min"]..":"..os.date("*t")["sec"].." -- ";
     for i,v in ipairs({...}) do
-        printResult ..= tostring(v) .. "	"
+        printResult ..= tostring(v) .. i == #{...} and "	" or ""
     end
     
     printResult ..= "@@reset@@"
@@ -25,7 +25,7 @@ local function hookedWarn(...)
 	local printResult = "@@yellow@@ ";
     printResult ..= os.date("*t")["hour"]..":"..os.date("*t")["min"]..":"..os.date("*t")["sec"].." -- ";
     for i,v in ipairs({...}) do
-        printResult ..= tostring(v) .. "	"
+        printResult ..= tostring(v)  .. i == #{...} and "	" or ""
     end
     
     printResult ..= "@@reset@@"
