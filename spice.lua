@@ -81,6 +81,8 @@ SWM.Backup.print([[
 
 
     This does not redirect the rconsole library, feel free to add it yourself.
+	
+    To clear the console, write cls() or clear()
 ]]);
 
 setreadonly(SWM,true);
