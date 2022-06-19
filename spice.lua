@@ -37,23 +37,23 @@ local function hookedWarn(...)
 end
 
 
-_G.SWM = {};
-SWM.Backup = {};
+getgenv().SWM = {};
+getgenv().SWM.Backup = {};
 
-SWM.Clear = function()
+getgenv().SWM.Clear = function()
 	if(hookEnabled and id ~= nil) then
 		socket:Send("c_cls()");
 	end
 end
 
-_G.cls = SWM.Clear();
-_G.clear = SWM.Clear();
+getgenv().cls = SWM.Clear();
+getgenv().clear = SWM.Clear();
 	
-SWM.print = hookedPrint;
-SWM.warn = hookedWarn;
+getgenv().SWM.print = hookedPrint;
+getgenv().SWM.warn = hookedWarn;
 
-SWM.Backup.print = hookfunction(print,SWM.print);
-SWM.Backup.warn = hookfunction(warn,SWM.warn);
+getgenv().SWM.Backup.print = hookfunction(print,SWM.print);
+getgenv().SWM.Backup.warn = hookfunction(warn,SWM.warn);
 
 socket.OnMessage:Connect(function(msg)
   if(string.split(msg, ' ')[1] == "uuid") then
@@ -64,19 +64,19 @@ socket.OnMessage:Connect(function(msg)
   end;
 end);
 
-SWM.HookOutput = function()
+getgenv().SWM.HookOutput = function()
 	hookEnabled = true;
 	hookfunction(print,SWM.print);
 	hookfunction(warn,SWM.warn);
 end
 
-SWM.DisableHook = function()
+getgenv().SWM.DisableHook = function()
 	hookEnabled = false;
 	hookfunction(print,SWM.Backup.print);
 	hookfunction(warn,SWM.Backup.warn);
 end
 
-SWM.Backup.print([[
+getgenv().SWM.Backup.print([[
     Script-Ware M has loaded! Ported by AHHH.
     Currently, every call to print and warn will redirect to the Build-In Console.
     To disable this, use SWM.DisableHook(). If you're missing your logs being baked into Script-Ware, run SWM.HookOutput().
@@ -87,4 +87,4 @@ SWM.Backup.print([[
     To clear the console, write cls() or clear()
 ]]);
 
-setreadonly(SWM,true);
+setreadonly(getgenv().SWM,true);
