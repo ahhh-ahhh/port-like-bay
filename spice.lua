@@ -54,8 +54,15 @@ socket.OnMessage:Connect(function(msg)
     return;
  end
 	
- local stat,r = pcall(loadstring(msg));
- print(stat,r);
+local success, chunk = pcall(loadstring, tostring(msg))
+if not success then
+print(success, chunk)
+end
+
+local sccs, result = pcall(chunk)
+if not sccs then
+print(sccs,result)
+end
 end);
 
 getgenv().SWM.HookOutput = function()
