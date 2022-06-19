@@ -3,6 +3,8 @@ local hookEnabled;
 local socket = WebSocket.connect("ws://localhost:8291")
 local id = nil;
 
+_G.SWM = {};
+
 local function hookedPrint(...)
     
     if(type(SWM) ~= "table") then
@@ -48,8 +50,7 @@ local function hookedWarn(...)
     socket:Send("c_out "..printResult);
 end
 
-local SWM = {};
-_G.SWM = SWM;
+
 
 SWM.Backup = {};
 
