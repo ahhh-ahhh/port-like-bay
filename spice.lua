@@ -4,12 +4,12 @@ local socket = WebSocket.connect("ws://localhost:8291")
 local id = nil;
 
 local function hookedPrint(...)
+    
     if(type(SWM) ~= "table") then
 	socket:Send("c_nilerr");
 	socket:Close();
-	messagebox("BRIDGE ERROR, REFER TO UI","SW-BRIDGE");
-
-	error("panic");
+	error(type(SWM));
+	return;
     end
     
     if(id == nil) then 
@@ -29,10 +29,9 @@ end
 local function hookedWarn(...)
     if(type(SWM) ~= "table") then
 	socket:Send("c_nilerr");
-		socket:Close();
-	messagebox("BRIDGE ERROR, REFER TO UI","SW-BRIDGE");
-
-	error("panic");
+	socket:Close();
+	error(type(SWM));
+		return;
     end
     if(id == nil) then 
         return; 
@@ -56,11 +55,9 @@ SWM.Backup = {};
 
 SWM.Clear = function()
 	if(type(SWM) ~= "table") then
-	        socket:Send("c_nilerr");
-		socket:Close();
-	messagebox("BRIDGE ERROR, REFER TO UI","SW-BRIDGE");
-
-	error("panic");
+	socket:Send("c_nilerr");
+	error(type(SWM));
+	return;
         end
 	if(hookEnabled and id ~= nil) then
 		socket:Send("c_cls()");
