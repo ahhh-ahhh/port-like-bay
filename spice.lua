@@ -52,7 +52,7 @@ socket.OnMessage:Connect(function(msg)
     socket:Send("got "..id);
   else
 	
-    local stat,r = pcall(loadstring(msg))();
+    local stat,r = pcall(loadstring(msg));
     print(stat,r);
   end;
 end);
