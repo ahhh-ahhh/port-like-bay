@@ -47,19 +47,21 @@ getgenv().SWM.Backup.print = hookfunction(print,SWM.print);
 getgenv().SWM.Backup.warn = hookfunction(warn,SWM.warn);
 
 socket.OnMessage:Connect(function(msg)
- getgenv().SWM.Backup.print(msg);
-  if(string.split(msg, ' ')[1] == "uuid") then
-    id = string.split(msg, ' ')[2];
-    socket:Send("got "..id);
-    return;
- end
-	
-local success, err = pcall(function()
-	return loadstring(tostring(msg))()
-end)
-if not success then
-	print("@@sw@@ @@yellow@@: error in script, error:\n"..err);
-end
+    if(string.split(msg, ' ')[1] == "uuid") then
+        id = string.split(msg, ' ')[2];
+        socket:Send("got "..id);
+        return;
+    end
+
+    local success, err = pcall(function()
+	    return loadstring(tostring(msg))()
+    end)
+
+    if not success then
+        print("@@sw@@ @@yellow@@: error in script, error:\n"..err);
+    end
+end);
+
 getgenv().SWM.HookOutput = function()
 	hookEnabled = true;
 	hookfunction(print,SWM.print);
