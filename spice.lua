@@ -58,7 +58,7 @@ local success, err = pcall(function()
 	return loadstring(tostring(msg))()
 end)
 if not success then
-	warn("@@sw@@: error in script, error:\n"..err);
+	print("@@sw@@ @@yellow@@: error in script, error:\n"..err);
 end
 getgenv().SWM.HookOutput = function()
 	hookEnabled = true;
