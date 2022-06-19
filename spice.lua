@@ -3,8 +3,6 @@ local hookEnabled;
 local socket = WebSocket.connect("ws://localhost:8291")
 local id = nil;
 
-_G.SWM = {};
-
 local function hookedPrint(...)
     
     if(id == nil) then 
@@ -39,7 +37,7 @@ local function hookedWarn(...)
 end
 
 
-
+_G.SWM = {};
 SWM.Backup = {};
 
 SWM.Clear = function()
