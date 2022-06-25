@@ -79,15 +79,4 @@ getgenv().SWM.DisableHook = function()
 	hookfunction(warn,SWM.Backup.warn);
 end
 
-getgenv().SWM.Backup.print([[
-    Script-Ware M has loaded! Ported by AHHH.
-    Currently, every call to print and warn will redirect to the Build-In Console.
-    To disable this, use SWM.DisableHook(). If you're missing your logs being baked into Script-Ware, run SWM.HookOutput().
-
-
-    This does not redirect the rconsole library, feel free to add it yourself.
-	
-    To clear the console, write cls() or clear()
-]]);
-
 setreadonly(getgenv().SWM,true);
