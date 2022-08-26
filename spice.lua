@@ -52,11 +52,12 @@ socket.OnMessage:Connect(function(msg)
 	    socket:Close();
 	    return; 
     end;
+
     if(string.split(msg, ' ')[1] == "uuid") then
         id = string.split(msg, ' ')[2];
         socket:Send("got "..id);
         return;
-    end
+    end;
 
     local success, err = pcall(function()
 	    return loadstring(tostring(msg))()
@@ -80,3 +81,12 @@ getgenv().SWM.DisableHook = function()
 end
 
 setreadonly(getgenv().SWM,true);
+
+
+local old;
+
+old = hookfunction(setreadonly, function(table,read)
+    if(table == SWM) then return; end
+
+    return old(table,read);
+end);
